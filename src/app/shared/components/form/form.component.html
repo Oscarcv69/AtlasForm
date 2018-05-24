@@ -1,0 +1,50 @@
+<mat-card fxLayout="row">
+  <div fxLayout="column" fxFlex=50 fxLayout.xs="column" fxFlex.xs="100">
+    <mat-form-field fxFlex="25">
+      <input matInput placeholder="Nombre">
+    </mat-form-field>
+    <mat-form-field fxFlex="25">
+      <input matInput placeholder="Email">
+    </mat-form-field>
+    <mat-form-field fxFlex=25>
+      <input matInput placeholder="DNI">
+    </mat-form-field>
+    <section fxFlex=25>
+      <label>Subscrito newsletter:</label>
+      <mat-radio-group>
+        <mat-radio-button fxFlexOffset="5px" *ngFor="let sub of subs" value={{sub.id}}>{{sub.name}}</mat-radio-button>
+      </mat-radio-group>
+    </section>
+    <section [ngStyle]="{'margin-top':'10px'}">
+      <label>Captación:</label>
+      <mat-radio-group>
+        <mat-radio-button fxFlexOffset="5px" *ngFor="let captation of captations" value={{captation.id}}>{{captation.name}}</mat-radio-button>
+      </mat-radio-group>
+    </section>
+    <mat-form-field>
+      <input matInput placeholder="Dirección">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Código postal">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Región">
+        <mat-option *ngFor="let country of countries" value={{country.id}}>{{country.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Ciudad">
+        <mat-option value="option">Option</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Observaciones"></textarea>
+    </mat-form-field>
+    <div>
+      <button fxFlex mat-raised-button>Save</button>
+    </div>
+  </div>
+
+  <div fxFlex=10></div>
+  <app-table fxFlex=50 fxFlex.xs=100></app-table>
+</mat-card>
