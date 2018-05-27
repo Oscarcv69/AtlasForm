@@ -1,28 +1,53 @@
-<div class="mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
-
-    <!-- Id Column -->
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
-    </ng-container>
-
-    <!-- Name Column -->
+<div class="mat-elevation-z8" fxFlex=100>
+  <mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+      <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.name}} </mat-cell>
     </ng-container>
-
-    <!-- Email Column -->
     <ng-container matColumnDef="email">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.email}}</mat-cell>
+      <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.email}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="document">
+      <mat-header-cell *matHeaderCellDef> Documento </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.document}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="subscribe">
+      <mat-header-cell *matHeaderCellDef> Subscrito </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.subscribe}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="captation">
+      <mat-header-cell *matHeaderCellDef> Captación </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.captation}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="country">
+      <mat-header-cell *matHeaderCellDef> País </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.country}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="region">
+      <mat-header-cell *matHeaderCellDef> Región </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.region}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="city">
+      <mat-header-cell *matHeaderCellDef> Ciudad </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.city}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef> Dirección </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.address}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="zipcode">
+      <mat-header-cell *matHeaderCellDef> Código Postal </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.zipcode}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="observations">
+      <mat-header-cell *matHeaderCellDef> Observaciones </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.observations}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 
-  <mat-paginator #paginator [length]="dataSource.data.length" [pageIndex]="0" [pageSize]="50" [pageSizeOptions]="[25, 50, 100, 250]">
-  </mat-paginator>
+
 </div>

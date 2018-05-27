@@ -1,6 +1,15 @@
+@import "01-settings/_settings.core.scss";
+@import "01-settings/_variables.scss";
+
+@import "02-tools/_breakpoints.scss";
+@import "02-tools/_clearfix.scss";
+@import "02-tools/_forms.scss";
+
 @import "03-generics/_align.scss";
 @import "03-generics/_normalize.scss";
 @import "03-generics/_text.scss";
+
+@import "04-elements/_elements.scss";
 
 @import "06-components/_buttons.scss";
 

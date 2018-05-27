@@ -1,50 +1,66 @@
-<mat-card fxLayout="row">
-  <div fxLayout="column" fxFlex=50 fxLayout.xs="column" fxFlex.xs="100">
-    <mat-form-field fxFlex="25">
-      <input matInput placeholder="Nombre">
-    </mat-form-field>
-    <mat-form-field fxFlex="25">
-      <input matInput placeholder="Email">
-    </mat-form-field>
-    <mat-form-field fxFlex=25>
-      <input matInput placeholder="DNI">
-    </mat-form-field>
-    <section fxFlex=25>
-      <label>Subscrito newsletter:</label>
-      <mat-radio-group>
-        <mat-radio-button fxFlexOffset="5px" *ngFor="let sub of subs" value={{sub.id}}>{{sub.name}}</mat-radio-button>
-      </mat-radio-group>
-    </section>
-    <section [ngStyle]="{'margin-top':'10px'}">
-      <label>Captación:</label>
-      <mat-radio-group>
-        <mat-radio-button fxFlexOffset="5px" *ngFor="let captation of captations" value={{captation.id}}>{{captation.name}}</mat-radio-button>
-      </mat-radio-group>
-    </section>
-    <mat-form-field>
-      <input matInput placeholder="Dirección">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Código postal">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-select placeholder="Región">
-        <mat-option *ngFor="let country of countries" value={{country.id}}>{{country.name}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-select placeholder="Ciudad">
-        <mat-option value="option">Option</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <textarea matInput placeholder="Observaciones"></textarea>
-    </mat-form-field>
-    <div>
-      <button fxFlex mat-raised-button>Save</button>
-    </div>
-  </div>
+<mat-card>
+  <form [formGroup]="rForm" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="25px">
 
-  <div fxFlex=10></div>
-  <app-table fxFlex=50 fxFlex.xs=100></app-table>
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+      <mat-form-field fxFlex>
+        <input matInput formControlName="name" id="name" name="name" name="name" placeholder="Nombre completo">
+        <mat-error *ngIf="hasError('name', ['required', 'pattern'])"> Debes introducir un nombre válido.</mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput formControlName="email" id="email" name="email" name="email" placeholder="Email">
+        <mat-error *ngIf="hasError('email', ['required', 'pattern'])"> Debes introducir un correo válido.</mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput formControlName="dni" id="dni" name="dni" name="dni" placeholder="DNI,NIE,NIF">
+        <mat-error *ngIf="hasError('dni', ['required', 'pattern'])"> Debes introducir un dni válido.</mat-error>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+      <mat-form-field fxFlex>
+        <mat-select formControlName="country" id="country" name="country" name="country" placeholder="País">
+          <mat-option *ngFor="let country of countries" [value]=country.id>{{country.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-select formControlName="region" id="region" name="region" name="region" placeholder="Región">
+          <mat-option *ngFor="let region of regions" [value]=region.id>{{region.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-select formControlName="city" id="city" name="city" name="city" placeholder="Ciudad">
+          <mat-option *ngFor="let city of cities" [value]=city.id>{{city.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+      <mat-form-field fxFlex>
+        <input matInput formControlName="address" id="address" name="address" name="address" placeholder="Dirección">
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput formControlName="zipcode" id="zipcode" name="zipcode" name="zipcode" placeholder="Código postal">
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-select formControlName="subscribe" id="subscribe" name="subscribe" name="subscribe" placeholder="Subscrito newsletter">
+          <mat-option *ngFor="let sub of subs" [value]=sub.id>{{sub.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-select formControlName="captation" id="captation" name="captation" name="captation" placeholder="Captación">
+          <mat-option *ngFor="let captation of captations" [value]=captation.id>{{captation.name}}</mat-option>
+          <mat-error *ngIf="hasError('captation', ['required'])"> Debes seleccionar un valor.</mat-error>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+    <div>
+      <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <mat-form-field fxFlex>
+          <textarea matInput formControlName="observations" id="observations" name="observations" name="observations" placeholder="Observaciones"></textarea>
+        </mat-form-field>
+      </div>
+      <div fxLayoutAlign="center center">
+        <button fxFlex=20 mat-raised-button class="btn-submit" (click)="createUser()">Crear</button>
+      </div>
+    </div>
+  </form>
 </mat-card>

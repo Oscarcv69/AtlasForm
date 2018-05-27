@@ -11,7 +11,8 @@ import {
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
-  MatButtonModule
+  MatButtonModule,
+  MatSnackBarModule
 } from "@angular/material";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -23,6 +24,11 @@ import { TopbarComponent } from "./shared/components/topbar/topbar.component";
 import { FooterComponent } from "./shared/components/footer/footer.component";
 import { AppTableComponent } from "./shared/components/app-table/app-table.component";
 import { MainComponent } from "./shared/components/main/main.component";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UserService } from "./shared/services/user.service";
+import { HttpClientModule } from "@angular/common/http";
+import { RouterModule } from "@angular/router";
+import { NotificationsService } from "./shared/services/notification.service";
 
 @NgModule({
   exports: [
@@ -36,7 +42,8 @@ import { MainComponent } from "./shared/components/main/main.component";
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSnackBarModule
   ],
   imports: [
     BrowserAnimationsModule,
@@ -46,7 +53,7 @@ import { MainComponent } from "./shared/components/main/main.component";
   ],
   declarations: []
 })
-export class DemoMaterialModule {}
+export class MaterialModule {}
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,12 +64,15 @@ export class DemoMaterialModule {}
     MainComponent
   ],
   imports: [
-    DemoMaterialModule,
+    MaterialModule,
     BrowserModule,
     BrowserAnimationsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [UserService, NotificationsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
