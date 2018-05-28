@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-// import "rxjs/add/operator/delay";
 import { HttpClient } from "@angular/common/http";
 import { Users } from "../models/user.model";
 import { AppSettings } from "../app.settings";

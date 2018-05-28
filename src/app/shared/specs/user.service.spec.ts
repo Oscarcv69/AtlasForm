@@ -20,7 +20,7 @@ describe("UsersService", () => {
     httpMock = TestBed.get(HttpTestingController);
   });
   describe("#Log method", () => {
-    it("should return an Observable<User[]>", () => {
+    it("should return a message>", () => {
       const params = { message: "has been created" };
       const expected = { messageExpected: `UserService: ${params.message}` };
 
@@ -29,20 +29,20 @@ describe("UsersService", () => {
       expect(logTest).toBe(expected.messageExpected);
     });
   });
-  describe("#getUsers", () => {
+  describe("#getUsers users lenght", () => {
     it("should return an Observable<User[]>", () => {
       userService.getUsers().subscribe(users => {
         expect(users.length).toBe(2);
       });
     });
-    it("should return an Observable<User[]>", () => {
+    it("should return if getUsers have been called>", () => {
       userService.getUsers().subscribe(users => {
         expect(userService.getUsers).toHaveBeenCalled();
       });
     });
   });
   describe("#isBusyEmail", () => {
-    it("should return an Observable<User[]>", () => {
+    it("should return if email is busy>", () => {
       const email = "fake@fake.com";
       userService.isEmailBusy(email).subscribe(users => {
         expect(users).toBeTruthy();
@@ -50,7 +50,7 @@ describe("UsersService", () => {
     });
   });
   describe("#isBusyDni", () => {
-    it("should return an Observable<User[]>", () => {
+    it("should return if document is busy>", () => {
       const dni = "12345678A";
       userService.isDocumentBusy(dni).subscribe(users => {
         expect(users).toBeTruthy();

@@ -15,6 +15,7 @@
         <mat-error *ngIf="hasError('dni', ['required', 'pattern'])"> Debes introducir un dni válido.</mat-error>
       </mat-form-field>
     </div>
+
     <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
       <mat-form-field fxFlex>
         <mat-select formControlName="country" id="country" name="country" name="country" placeholder="País">
@@ -32,6 +33,7 @@
         </mat-select>
       </mat-form-field>
     </div>
+
     <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
       <mat-form-field fxFlex>
         <input matInput formControlName="address" id="address" name="address" name="address" placeholder="Dirección">
@@ -44,23 +46,22 @@
           <mat-option *ngFor="let sub of subs" [value]=sub.id>{{sub.name}}</mat-option>
         </mat-select>
       </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
       <mat-form-field fxFlex>
         <mat-select formControlName="captation" id="captation" name="captation" name="captation" placeholder="Captación">
           <mat-option *ngFor="let captation of captations" [value]=captation.id>{{captation.name}}</mat-option>
           <mat-error *ngIf="hasError('captation', ['required'])"> Debes seleccionar un valor.</mat-error>
         </mat-select>
       </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput formControlName="observations" id="observations" name="observations" name="observations" placeholder="Observaciones">
+      </mat-form-field>
+    </div>
+    <div fxLayoutAlign="center center">
+      <button fxFlex=20 mat-raised-button class="btn-submit" (click)="createUser()">Crear</button>
+    </div>
 
-    </div>
-    <div>
-      <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
-        <mat-form-field fxFlex>
-          <textarea matInput formControlName="observations" id="observations" name="observations" name="observations" placeholder="Observaciones"></textarea>
-        </mat-form-field>
-      </div>
-      <div fxLayoutAlign="center center">
-        <button fxFlex=20 mat-raised-button class="btn-submit" (click)="createUser()">Crear</button>
-      </div>
-    </div>
   </form>
 </mat-card>
