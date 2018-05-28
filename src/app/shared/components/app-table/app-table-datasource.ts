@@ -5,13 +5,13 @@ import { Observable, of as observableOf, merge } from "rxjs";
 import { OnInit } from "@angular/core";
 import { UserService } from "../../services/user.service";
 import { HttpClient } from "@angular/common/http";
-import { Users } from "../../models/user.model";
+import { User } from "../../models/user.model";
 export class AppTableDataSource extends DataSource<any> {
   constructor(private userService: UserService) {
     super();
   }
 
-  connect(): Observable<Users[]> {
+  connect(): Observable<User[]> {
     return this.userService.getUsers();
   }
 

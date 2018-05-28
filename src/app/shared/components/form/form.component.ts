@@ -9,7 +9,7 @@ import {
 import { UserService } from "../../services/user.service";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { AppSettings } from "../../app.settings";
-import { Users } from "../../models/user.model";
+import { User } from "../../models/user.model";
 import { NotificationsService } from "../../services/notification.service";
 import { AppTableDataSource } from "../app-table/app-table-datasource";
 
@@ -19,6 +19,7 @@ import { AppTableDataSource } from "../app-table/app-table-datasource";
   styleUrls: ["./form.component.css"]
 })
 export class FormComponent implements OnInit {
+  hasEntry: Boolean = false;
   regions = [{ id: "Andalucia", name: "Andalucía" }];
 
   cities = [
@@ -39,7 +40,7 @@ export class FormComponent implements OnInit {
   rForm: FormGroup;
 
   // tslint:disable-next-line:no-output-on-prefix
-  @Output() onCreated: EventEmitter<Users> = new EventEmitter<Users>();
+  @Output() onCreated: EventEmitter<User> = new EventEmitter<User>();
 
   appDatatable: AppTableDataSource;
   constructor(
@@ -83,7 +84,7 @@ export class FormComponent implements OnInit {
     );
   }
   public createUser() {
-    const user: Users = {
+    const user: User = {
       name: this.rForm.get("name").value,
       email: this.rForm.get("email").value,
       document: this.rForm.get("dni").value,
@@ -105,7 +106,49 @@ export class FormComponent implements OnInit {
           this.rForm
         )
       );
-    this.refresData();
+    this.refreshData();
+  }
+
+  public userEditedEmail(email: string) {
+    if (this.hasEntry === false) {
+      this.hasEntry = true;
+      const user$ = this.userService.isFieldEditEmail(email);
+      user$.subscribe(users =>
+        users.forEach(user => {
+          this.rForm.controls["name"].setValue(user.name);
+          this.rForm.controls["dni"].setValue(user.document);
+          this.rForm.controls["subscribe"].setValue(user.subscribe);
+          this.rForm.controls["captation"].setValue(user.captation);
+          this.rForm.controls["address"].setValue(user.address);
+          this.rForm.controls["zipcode"].setValue(user.zipcode);
+          this.rForm.controls["region"].setValue(user.region);
+          this.rForm.controls["city"].setValue(user.city);
+          this.rForm.controls["country"].setValue(user.country);
+          this.rForm.controls["observations"].setValue(user.observations);
+        })
+      );
+    }
+  }
+
+  public userEditedDocument(document: string) {
+    if (this.hasEntry === false) {
+      this.hasEntry = true;
+      const user$ = this.userService.isFieldEditDocument(document);
+      user$.subscribe(users =>
+        users.forEach(user => {
+          this.rForm.controls["name"].setValue(user.name);
+          this.rForm.controls["email"].setValue(user.email);
+          this.rForm.controls["subscribe"].setValue(user.subscribe);
+          this.rForm.controls["captation"].setValue(user.captation);
+          this.rForm.controls["address"].setValue(user.address);
+          this.rForm.controls["zipcode"].setValue(user.zipcode);
+          this.rForm.controls["region"].setValue(user.region);
+          this.rForm.controls["city"].setValue(user.city);
+          this.rForm.controls["country"].setValue(user.country);
+          this.rForm.controls["observations"].setValue(user.observations);
+        })
+      );
+    }
   }
 
   public hasError(formField: string, validators: string[]): boolean {
@@ -132,10 +175,13 @@ export class FormComponent implements OnInit {
     this.rForm.get("email").valueChanges.subscribe((email: string) => {
       this.userService.isEmailBusy(email).subscribe(isBusy => {
         if (isBusy) {
+          this.userEditedEmail(this.rForm.get("email").value);
+          this.hasEntry = false;
           this.notificationsService.showNotificationEdit(
-            "Error: El email ya existe, ¿Desea editarlo?",
+            "Alerta: ¿Desea editar el usuario?",
             "No",
-            this.rForm
+            this.rForm,
+            this.hasEntry
           );
         }
       });
@@ -146,15 +192,17 @@ export class FormComponent implements OnInit {
       this.userService.isDocumentBusy(document).subscribe(isBusy => {
         if (isBusy) {
           this.notificationsService.showNotificationEdit(
-            "Error: El dni ya existe, ¿Desea editarlo?",
+            "Alerta: ¿Desea editar el usuario?",
             "No",
-            this.rForm
+            this.rForm,
+            this.hasEntry
           );
+          this.userEditedDocument(this.rForm.get("dni").value);
         }
       });
     });
   }
-  private refresData(): void {
+  private refreshData(): void {
     window.location.reload();
   }
 }

@@ -1,5 +1,4 @@
-import { AppSettings } from "../app.settings";
-export interface Users {
+export interface User {
   name: string;
   email: string;
   document: string;

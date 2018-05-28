@@ -17,5 +17,8 @@ export class AppSettings {
   public static readonly DNI_VALIDATION = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i;
   public static readonly NIE_VALIDATION = /[XYZ][0-9]{1,7}[A-Z]/;
 
-  public static readonly NOTIFICATIONS = { DEFAULT_TIME: 2000 };
+  public static readonly NOTIFICATIONS = {
+    DEFAULT_TIME: 2000,
+    EDITED_TIME: 5000
+  };
 }

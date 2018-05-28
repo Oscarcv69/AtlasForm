@@ -4,7 +4,7 @@ import { AppTableDataSource } from "./app-table-datasource";
 
 import { UserService } from "../../services/user.service";
 import { HttpClient } from "@angular/common/http";
-import { Users } from "../../models/user.model";
+import { User } from "../../models/user.model";
 import { Observable, of as observableOf, merge } from "rxjs";
 @Component({
   selector: "app-table",
