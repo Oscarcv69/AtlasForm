@@ -47,8 +47,7 @@ describe("UsersService", () => {
     it("should return if email is busy>", () => {
       const email = "fake@fake.com";
       userService.isEmailBusy(email).subscribe(users => {
-        console.log(users);
-        expect(users).toBeFalsy();
+        expect(users).toBeTruthy();
       });
     });
   });

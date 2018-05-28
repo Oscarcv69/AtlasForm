@@ -31,11 +31,11 @@ export class FormComponent implements OnInit {
   countries = [{ id: "Espana", name: "España" }];
 
   captations = [
-    { id: "telf", name: "Telefónica" },
-    { id: "web", name: "Web" },
-    { id: "pres", name: "Presencial" }
+    { id: "Telefonica", name: "Telefónica" },
+    { id: "Web", name: "Web" },
+    { id: "Presencial", name: "Presencial" }
   ];
-  subs = [{ id: "si", name: "Si" }, { id: "no", name: "No" }];
+  subs = [{ id: "Si", name: "Si" }, { id: "No", name: "No" }];
 
   rForm: FormGroup;
 
