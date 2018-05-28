@@ -29,10 +29,12 @@ describe("UsersService", () => {
       expect(logTest).toBe(expected.messageExpected);
     });
   });
-  describe("#getUsers users lenght", () => {
+  describe("#getUsers user", () => {
     it("should return an Observable<User[]>", () => {
-      userService.getUsers().subscribe(users => {
-        expect(users.length).toBe(2);
+      const userServ = getTestBed().get(UserService);
+      userService.getUsers().subscribe(actualUsers => {
+        expect(actualUsers.length).toBe(1);
+        expect(actualUsers[0].name).toEqual("oscar");
       });
     });
     it("should return if getUsers have been called>", () => {
@@ -45,7 +47,8 @@ describe("UsersService", () => {
     it("should return if email is busy>", () => {
       const email = "fake@fake.com";
       userService.isEmailBusy(email).subscribe(users => {
-        expect(users).toBeTruthy();
+        console.log(users);
+        expect(users).toBeFalsy();
       });
     });
   });
